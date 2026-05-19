@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/write.js": {
+      "maxDuration": 90
+    }
+  }
+}
