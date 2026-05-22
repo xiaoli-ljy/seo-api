@@ -104,7 +104,11 @@ Output a valid JSON object with this exact structure (no markdown code fences, p
       });
     }
 
-    return res.status(200).json(content);
+    const briefMatch = content.match(/\{[\s\S]*"wordCount"[\s\S]*\}/);
+    const brief = briefMatch ? JSON.parse(briefMatch[0]) : null;
+    const summary = content.replace(/\{[\s\S]*"wordCount"[\s\S]*\}/, "").trim();
+
+    return res.status(200).json({ brief, summary });
   } catch (error) {
     return res.status(500).json({
       error: "Unexpected error in analyze handler",
